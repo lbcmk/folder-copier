@@ -1,11 +1,15 @@
 from json import load, dumps
-from os import stat
+from os import stat, mkdir
 from os.path import exists
 
 jsonFileLocation = "preferences/folders.json"
 
 class GetDirectories:
     def __init__(self) -> None:
+        
+        if not exists("preferences"):
+            mkdir("preferences")
+
         if not exists(jsonFileLocation):
             with open(jsonFileLocation, 'w') as f: f.close() 
                 
