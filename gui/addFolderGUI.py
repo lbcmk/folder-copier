@@ -114,14 +114,28 @@ class FolderChooseGUI:
             )
     
 
-        self.write = customtkinter.CTkButton(
+        self.reset = customtkinter.CTkButton(
             master=self.app, 
             width=75, 
             text="Reset", 
             command=self.ClearFolderText
             )
-        self.write.place(
+        self.reset.place(
             x=_x, 
             y=_y+150, 
             anchor=tkinter.W
             )
+
+        self.exit = customtkinter.CTkButton(
+            master=self.app, 
+            width=75, 
+            text="Exit", 
+            command=self.app.destroy
+            )
+        self.exit.place(
+            x=_x+150, 
+            y=_y+150, 
+            anchor=tkinter.W
+            )
+
+        
