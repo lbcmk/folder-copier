@@ -1,4 +1,4 @@
-from gui.mainGUI import FolderChooseGUI
+import gui.webserver
 
-gui = FolderChooseGUI()
-gui.app.mainloop()
+if __name__ == "__main__":
+    gui.webserver.runWebServer()
