@@ -1,0 +1,14 @@
+Code by lbcmk (https://github.com/lbcmk)
+Folder icon by lbcmk
+
+
+Material Icons:
+Material Icons made by the Material Design Icons team (https://github.com/google/material-design-icons)
+
+Material Icons' Apache 2.0 license at gui/html/assets/material-icons/LICENSE
+
+
+Poppins Font:
+Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/Poppins)
+
+Poppins' OFL license at gui/html/assets/fonts/OFL.txt
