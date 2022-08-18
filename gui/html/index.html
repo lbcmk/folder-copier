@@ -1,70 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Folder Copier Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="assets/icon.ico">    
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js" defer></script>
-    <script src="options.js" async></script>
-  </head>
-  <body>
-    
-    <div id="folderAppOpenBlocker">
-      
-    </div>
+<head>
+	<title>Folder Copier Dashboard</title>
+	<link rel="icon" type="image/x-icon" href="assets/icon.ico">    
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="script.js" defer></script>
+	<script src="options.js" async></script>
+	<script src="folderCard.js" defer></script>
+</head>
+<body>
+	<div id="header">
+		<a href="/">
+			<img id='navbar-logo' src="assets/icon.png" alt="Folder Copier icon"/>
+		</a>
+		<h1 id="navbar-text">Dashboard</h1>
+		<div style="padding-left: 40px;""></div>
+		<div id="folder-search-div">
+			<input type="text" id="folder-search" onkeyup="searchFunction()" placeholder="Search" />
+			<button id="search-button" onmousedown="searchButtonFunction()"></button>
+		</div>
+		<button id="add-button" onmousedown="runAddFolders()"></button>
+		<button id="settings-button" onmousedown="settingsButtonFunction()"></button>
+	</div>
 
-    <div id="header">
-      <a href="/">
-      <img id='navbar-logo' src="assets/icon.png" alt="Folder Copier icon"/>
-      </a>
-      <h1 id="navbar-text">Dashboard</h1>
-      <div style="padding-left: 40px;""></div>
-      <div id="folder-search-div">
-        <input type="text" id="folder-search" placeholder="Search" />
-        <button id="search-button" onmousedown="searchButtonFunction()">
-          <img id="search-button-icon" src="assets/search.svg" alt="search button" width="30px" height="30px" />
-        </button>
-      </div>
-      <button id="settings-button" onmousedown="runAddFolders()">
-        <img id="settings-button-icon" src="assets/add.svg" alt="settings button" width="30px" height="30px" />
-      </button>
-      <button id="settings-button" onmousedown="settingsButtonFunction()">
-        <img id="settings-button-icon" src="assets/settings.svg" alt="settings button" width="30px" height="30px" />
-      </button>
-    </div>
+	<div id="smallsearchbox">
+		<input type="text" id="small-folder-search" onkeyup="searchFunction()" placeholder="Search" />
+	</div>
+	
+	<div class="folder cards">
 
-    <div id="smallsearchbox">
-      <input type="text" id="small-folder-search" placeholder="Search" />
-    </div>
-    
-    <div class="folder list">
-      <div class="folder text">
-        <h3>test</h3>
-        <p>copies to</p>
-        <h3>test2</h3>
-      </div>
-      <div class="folder buttons">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-      </div>
-    </div>
+	</div>
 
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-    <h1>.</h1>
-
-  </body>
+</body>
 </html>

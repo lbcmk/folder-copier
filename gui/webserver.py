@@ -22,6 +22,14 @@ class WebServer(BaseHTTPRequestHandler):
 			addToPath = False
 		if self.path=="/options":
 			self.path="preferences/options.json"
+			with open(self.path, 'r') as f:
+				if(len(f.read()) == 0):
+					f.close()
+					g = open(self.path, 'a')
+					g.write("{}")
+					g.close()
+				else:
+					f.close()
 			addToPath = False
 
 		if addToPath == True:
@@ -47,6 +55,8 @@ class WebServer(BaseHTTPRequestHandler):
 					mimetype='application/json'
 			if self.path.endswith(".css"):
 					mimetype='text/css'
+			if self.path.endswith(".ttf"):
+					mimetype='font/ttf'
 
 			if('mimetype' in locals()):
 				sendReply = True
@@ -121,7 +131,7 @@ class WebServer(BaseHTTPRequestHandler):
 					except:
 						print("Couldn't Open the Add Folder Program")
 
-					self.wfile.write(bytes(dumps({"response": "app closed"}), "utf-8"))
+					self.wfile.write(bytes(dumps({"response": "app opened"}), "utf-8"))
 				else:
 					self.send_response(400)
 					self.end_headers()
@@ -131,7 +141,7 @@ class WebServer(BaseHTTPRequestHandler):
 def runWebServer():        
 	webServer = HTTPServer((hostName, serverPort), WebServer)
 	print(f"Server started http://{hostName}:{serverPort}")
-	webBrowserOpen(f"http://{hostName}:{serverPort}", new=0, autoraise=True)
+	# webBrowserOpen(f"http://{hostName}:{serverPort}", new=0, autoraise=True)
 
 	try:
 		webServer.serve_forever()

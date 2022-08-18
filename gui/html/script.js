@@ -59,3 +59,44 @@ function searchButtonFunction() {
 function settingsButtonFunction() {
     console.log("add")
 }
+
+var r = document.querySelector(':root');
+function changeTheme(data) {
+    if(data["darkMode"] == "True"){
+        r.style.setProperty('--primary-color', '#455363');
+        r.style.setProperty('--secondary-color', '#b3b3b3');
+        r.style.setProperty('--background-color', '#1f2935');
+        r.style.setProperty('--background-secondary-color', '#313d4d');
+        r.style.setProperty('--text-color', '#fff');
+    }
+    else if(data["darkMode"] == "False") {
+        r.style.setProperty('--primary-color', '#fff');
+        r.style.setProperty('--secondary-color', '#355363');
+        r.style.setProperty('--background-color', '#ffffff');
+        r.style.setProperty('--background-secondary-color', '#f0f0f3');
+        r.style.setProperty('--text-color', '#2d2d2d');
+    }
+}
+
+function searchFunction() {
+    var input, filter, cardHolder, card
+    input = document.getElementById('folder-search');
+    filter = input.value.toUpperCase();
+    cardHolder = document.getElementsByClassName("folder cards")[0];
+    card = cardHolder.getElementsByTagName('div');
+
+    for (i = 0; i < card.length; i++) {
+        texts = card[i].getElementsByTagName("h3");
+        dir1 = texts[0].textContent || texts[0].innerText;
+        dir2 = texts[1].textContent || texts[1].innerText;
+        if (dir1.toUpperCase().indexOf(filter) > -1 || dir2.toUpperCase().indexOf(filter) > -1) {
+            card[i].style.display = "";
+        } else {
+            card[i].style.display = "none";
+        }
+    }
+}
+
+// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//     document.querySelector("img#search-button-icon").style.filter
+// }
