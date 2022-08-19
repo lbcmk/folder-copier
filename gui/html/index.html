@@ -7,6 +7,7 @@
 	<script src="script.js" defer></script>
 	<script src="options.js" async></script>
 	<script src="folderCard.js" defer></script>
+	<script src="backup.js" defer></script>
 </head>
 <body>
 	<div id="header">
@@ -28,7 +29,26 @@
 	</div>
 	
 	<div class="folder cards">
-
+		
+	</div>
+	
+	<div id="options-window">
+		<div id="options-tab">
+			<div id="darkmodeOptionContainer">
+				<h3 id="darkmodeText">Darkmode: </h3>
+				<label class="theme-switch" for="timeThemeCheckbox">
+					<input type="checkbox" id="timeThemeCheckbox"/>
+					<div class="slider round"></div>
+				</label>
+			</div>
+			<div id="backupAllFoldersContainer">
+				<h3 id="darkmodeText">Backup all folders: </h3>
+				<button id="backup-all-button" onmousedown="backupAllFolders()"> 
+					<img id="backup-button-icon" src="assets/material-icons/backup.svg" alt="backup button" width="20px" height="20px" />
+				</button>
+			</div>
+			<button id="close-button" onmousedown="closeSettingsButtonFunction()"></button> 
+		</div>
 	</div>
 
 </body>

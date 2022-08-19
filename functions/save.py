@@ -40,7 +40,8 @@ class GetDirectories:
 
         folderInfo = {
             "sourceDir": str(dir1),
-            "destinationDir": str(dir2)
+            "destinationDir": str(dir2),
+            "hash": str(hash(str(dir1) + str(dir2)))
         }
         jsonData = self.getDirectories()
 

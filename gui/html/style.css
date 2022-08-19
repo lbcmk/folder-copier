@@ -17,14 +17,12 @@
     --text-color: #2d2d2d;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color: #455363;
-        --secondary-color: #b3b3b3;
-        --background-color: #1f2935;
-        --background-secondary-color: #313d4d;
-        --text-color: #fff;
-    }
+[data-theme="dark"] {
+    --primary-color: #455363;
+    --secondary-color: #b3b3b3;
+    --background-color: #1f2935;
+    --background-secondary-color: #313d4d;
+    --text-color: #fff;
 }
 
 /* Website Styling */
@@ -93,8 +91,7 @@ div#folder-search-div {
 
 /* Navbar Buttons */
 
-button#settings-button, button#search-button, button#add-button {
-    margin-right: 20px;
+button#settings-button, button#search-button, button#add-button, button#close-button {
     background-color: white;
     padding: 5px;
     border: 0px;
@@ -105,6 +102,7 @@ button#settings-button, button#search-button, button#add-button {
 }
 
 button#settings-button {
+    margin-right: 20px;
     mask: url(assets/material-icons/settings.svg) 10px 10px/30px 30px no-repeat exclude;
 }
 
@@ -113,6 +111,7 @@ button#search-button {
 }
 
 button#add-button {
+    margin-right: 20px;
     mask: url(assets/material-icons/add.svg) 5px 5px/40px 40px no-repeat exclude;
 }
 
@@ -180,7 +179,7 @@ h3, p {
     font-family: 'Poppins', sans-serif;
 }
 
-.folder.buttons {
+.folder.buttons, button#backup-all-button {
     margin-left: auto;
     margin-right: 20px;
     margin-top: 20px;
@@ -198,6 +197,9 @@ button.folder.buttons.deleteButton {
 button.folder.buttons.backupButton {
     background-color: rgb(104, 204, 104);
 }
+button#backup-all-button {
+    background-color: rgb(104, 204, 104);
+}
 
 button.folder.buttons.deleteButton:hover {
     background-color: rgb(196, 56, 56);
@@ -206,7 +208,145 @@ button.folder.buttons.backupButton:hover {
     background-color: rgb(71, 151, 71);
 }
 
+button#backup-all-button:hover {
+    background-color: rgb(71, 151, 71);
+}
+
 img#delete-button-icon, img#backup-button-icon{
     filter: brightness(0);
     margin-top: 3px;
+}
+
+/* Options Tab */
+
+div#options-window {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #00000079;
+    z-index: 15;
+}
+
+div#options-tab {
+    background-color: var(--background-secondary-color);
+    z-index: 15;
+    padding: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+    div#options-tab {
+        position: static;
+        width: 50%;
+        min-width: 600px;
+        height: 50%;
+        min-height: 400px;
+        margin: auto;
+        transform: translateY(50%);
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    div#options-tab {
+        position: static;
+        width: 100% - 20px;
+        height: 80%;
+        transform: translateY(25%);
+    }
+}
+
+button#close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    mask: url(assets/material-icons/close.svg) 5px 5px/40px 40px no-repeat exclude;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 100%;}
+}
+
+@keyframes dropDown1 { 
+    0% { transform: translateY(-100%); } 
+    100% {transform: translateY(50%)}
+}
+
+@keyframes dropDown2 { 
+    0% { transform: translateY(100%); } 
+    100% {transform: translateY(25%)}
+}
+
+/* Theme Toggler */
+
+h3#darkmodeText {
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+div#darkmodeOptionContainer > *, div#backupAllFoldersContainer > * {
+    display: inline-block;
+}
+
+button#backup-all-button {
+    transform: translateX(30%) translateY(10%);
+}
+
+/* By Ananya Neogi */
+/* https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8 */
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+    transform: translateX(30%) translateY(30%);
+}
+
+.theme-switch input {
+    display:none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color: #666ebb;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

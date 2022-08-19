@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from gui.addFolderGUI import FolderChooseGUI
 from webbrowser import open as webBrowserOpen
 from multiprocessing import Process
-from json import dumps
+from json import dumps, loads
 
 hostName = "localhost"
 serverPort = 8080
@@ -104,9 +104,22 @@ class WebServer(BaseHTTPRequestHandler):
 					self.send_header('Content-type', 'application/json')
 					self.end_headers()
 
-					requestContentBody = self.rfile.read(int(requestContentLength))
+					requestContentBody = loads(self.rfile.read(int(requestContentLength)).decode("utf-8"))
+					key = list(requestContentBody.keys())
+					value = list(requestContentBody.values())
 					
-					message = {"response": "POST response"}
+					j = ""
+					with open("preferences/options.json", "r") as f:
+						j = loads(f.read())
+						for i in range(len(key)):
+							j[key[i]] = value[i]
+						f.close()
+
+					with open("preferences/options.json", "w") as f:
+						f.write(dumps(j, indent=4, separators=(", ", ": ")))
+						f.close()
+
+					message = {"response": value}
 					test = dumps(message)
 					self.wfile.write(bytes(test, "utf-8"))
 				else:

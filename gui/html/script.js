@@ -16,7 +16,7 @@ window.addEventListener("resize", function() {
         if(abovepx == false) {
             abovepx = true
             searchDiv = this.document.querySelector("div#folder-search-div")
-
+            
             document.querySelector("input#folder-search").style.display = ""
             document.querySelector("button#search-button").style.display = "none"
             
@@ -40,13 +40,13 @@ window.addEventListener("resize", function() {
 function searchButtonFunction() {
     displayTextInputDiv = document.querySelector("div#smallsearchbox").style.display
     displayTextInput = document.querySelector("input#small-folder-search").style.display
-
+    
     if(displayTextInputDiv == "") {
         document.querySelector("div#smallsearchbox").style.display = "none"
     } else if (displayTextInputDiv == "none") {
         document.querySelector("div#smallsearchbox").style.display = ""
     }
-
+    
     if(displayTextInput == "") {
         document.querySelector("input#small-folder-search").style.display = "none"
         inputtext = document.querySelector("input#small-folder-search").value
@@ -56,27 +56,38 @@ function searchButtonFunction() {
     }
 }
 
-function settingsButtonFunction() {
-    console.log("add")
+const timeThemeToggle = document.querySelector('.theme-switch input[type="checkbox"]');
+timeThemeToggle.checked = false
+
+if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    timeThemeToggle.checked = true
 }
 
-var r = document.querySelector(':root');
 function changeTheme(data) {
     if(data["darkMode"] == "True"){
-        r.style.setProperty('--primary-color', '#455363');
-        r.style.setProperty('--secondary-color', '#b3b3b3');
-        r.style.setProperty('--background-color', '#1f2935');
-        r.style.setProperty('--background-secondary-color', '#313d4d');
-        r.style.setProperty('--text-color', '#fff');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        timeThemeToggle.checked = true
     }
     else if(data["darkMode"] == "False") {
-        r.style.setProperty('--primary-color', '#fff');
-        r.style.setProperty('--secondary-color', '#355363');
-        r.style.setProperty('--background-color', '#ffffff');
-        r.style.setProperty('--background-secondary-color', '#f0f0f3');
-        r.style.setProperty('--text-color', '#2d2d2d');
+        document.documentElement.setAttribute('data-theme', 'light');
+        timeThemeToggle.checked = false
     }
 }
+
+function switchTheme(input) {
+    if (input.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        putOptions({"darkMode": "True"})
+    }
+    else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        putOptions({"darkMode": "False"})
+    }    
+}
+
+timeThemeToggle.addEventListener('change', switchTheme, false);
+
 
 function searchFunction() {
     var input, filter, cardHolder, card
@@ -84,7 +95,7 @@ function searchFunction() {
     filter = input.value.toUpperCase();
     cardHolder = document.getElementsByClassName("folder cards")[0];
     card = cardHolder.getElementsByTagName('div');
-
+    
     for (i = 0; i < card.length; i++) {
         texts = card[i].getElementsByTagName("h3");
         dir1 = texts[0].textContent || texts[0].innerText;
@@ -97,6 +108,14 @@ function searchFunction() {
     }
 }
 
-// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//     document.querySelector("img#search-button-icon").style.filter
-// }
+function disableScroll() {
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    window.onscroll = function() {
+        window.scrollTo(scrollLeft, scrollTop);
+    };
+}
+
+function enableScroll() {
+    window.onscroll = function() {};
+}
