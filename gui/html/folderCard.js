@@ -1,4 +1,5 @@
 var data = {}
+var oldDirectoriesData = []
 var directoriesData = []
 
 function runAddFolders() {
@@ -28,6 +29,33 @@ async function getFolders(writeCard = false) {
         for(i=0; i<directoriesData.length; i++) {
             createFolderCard(directoriesData[i])
         }
+        return directoriesData
+    } 
+    // Auto reload folder cards
+    else {
+        folderCards = document.getElementsByClassName("folder list")
+        folderCardIds = []
+        for(i=0; i<folderCards.length; i++) {
+            folderCardIds.push(folderCards[i].id)
+        }
+        j = []
+        for(i=0; i<directoriesData.length; i++) {
+            if(document.getElementById(directoriesData[i]["hash"]) != null) {
+                j.push(i - j.length)
+            }
+            if(folderCardIds.includes(directoriesData[i]["hash"])) {
+                folderCardIds.splice(folderCardIds.indexOf(directoriesData[i]["hash"]), 1);
+            }
+        }
+        for(i=0; i<j.length; i++) {
+            directoriesData.splice(j[i], 1)
+        }
+        for(i=0; i<directoriesData.length; i++) {
+            createFolderCard(directoriesData[i])
+        }
+        for(i=0; i<folderCardIds.length; i++) {
+            document.getElementById(folderCardIds[i]).parentElement.removeChild(document.getElementById(folderCardIds[i]))
+        }
     }
 }
 
@@ -36,6 +64,7 @@ function createFolderCard(data) {
 
     folderListDiv = document.createElement("div")
     folderListDiv.setAttribute("class", "folder list")
+    folderListDiv.setAttribute("id", data["hash"])
 
     dir1 = document.createElement("h3")
     dir1.setAttribute("class", "folder text folder1")
@@ -84,7 +113,7 @@ function createFolderCard(data) {
 
 /*
 <div class="folder list">
-    <h3 class="folder text folder1">test</h3>
+    <h3 class="folder text folder1">data["sourceDir"]</h3>
     <button class="folder buttons deleteButton"> 
         <img id="delete-button-icon" src="assets/material-icons/delete.svg" alt="delete button" width="20px" height="20px" />
     </button>
@@ -92,25 +121,11 @@ function createFolderCard(data) {
     <button class="folder buttons backupButton"> 
         <img id="backup-button-icon" src="assets/material-icons/backup.svg" alt="backup button" width="20px" height="20px" />
     </button>
-    <h3 class="folder text folder2">test2</h3>
+    <h3 class="folder text folder2">data["destinationDir"]</h3>
 </div>
 */
 
-// const getFoldersPromise = new Promise((resolve, reject) => {
-//       resolve(getFolders());
-// });
-
-// getFoldersPromise
-//     .then((data) => {
-//         console.log(data)
-//         console.log(directoriesData)
-//         // for(i=0; i<directoriesData[0].length; i++) {
-//         //     createFolderCard(directoriesData[0][i])
-//         //     console.log(directoriesData[0][i])
-//         // }
-//     })
-//     .catch((error) => {
-//         console.error(error)
-//     })
-    
 getFolders(true)
+// getFolders()
+
+setInterval(function() {getFolders()}, 1000)
