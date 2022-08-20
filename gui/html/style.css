@@ -281,12 +281,12 @@ button#close-button {
 
 /* Theme Toggler */
 
-h3#darkmodeText {
+h3.options.text {
     margin-top: 10px;
     margin-left: 25px;
 }
 
-div#darkmodeOptionContainer > *, div#backupAllFoldersContainer > * {
+div.options.container > * {
     display: inline-block;
 }
 
@@ -294,13 +294,25 @@ button#backup-all-button {
     transform: translateX(30%) translateY(10%);
 }
 
+input#reloadFoldersCheckbox {
+
+}
+
+.reloadFolders-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+    transform: translateX(30%) translateY(30%);
+}
+
+.reloadFolders-switch input {
+    display:none;
+}
+
 /* By Ananya Neogi */
 /* https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8 */
 
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-}
 .theme-switch {
     display: inline-block;
     height: 34px;
@@ -311,6 +323,10 @@ button#backup-all-button {
 
 .theme-switch input {
     display:none;
+}
+
+input:checked + .reloadFolders.slider {
+    background-color: #66bb7b;
 }
 
 .slider {
@@ -336,7 +352,7 @@ button#backup-all-button {
 }
 
 input:checked + .slider {
-    background-color: #666ebb;
+    background-color: #5a63b1;
 }
 
 input:checked + .slider:before {

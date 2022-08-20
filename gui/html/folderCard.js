@@ -38,17 +38,14 @@ async function getFolders(writeCard = false) {
         for(i=0; i<folderCards.length; i++) {
             folderCardIds.push(folderCards[i].id)
         }
-        j = []
+        j = 0
         for(i=0; i<directoriesData.length; i++) {
             if(document.getElementById(directoriesData[i]["hash"]) != null) {
-                j.push(i - j.length)
+                k = i - j
+                folderCardIds.splice(folderCardIds.indexOf(directoriesData[k]["hash"]), 1);
+                directoriesData.splice(k, 1)
+                j++
             }
-            if(folderCardIds.includes(directoriesData[i]["hash"])) {
-                folderCardIds.splice(folderCardIds.indexOf(directoriesData[i]["hash"]), 1);
-            }
-        }
-        for(i=0; i<j.length; i++) {
-            directoriesData.splice(j[i], 1)
         }
         for(i=0; i<directoriesData.length; i++) {
             createFolderCard(directoriesData[i])
@@ -126,6 +123,33 @@ function createFolderCard(data) {
 */
 
 getFolders(true)
-// getFolders()
 
-setInterval(function() {getFolders()}, 1000)
+
+// Check for the autoreload switch in options
+
+var reloadFoldersInterval = setInterval(function() {getFolders()}, 1000)
+const reloadFoldersToggle = document.querySelector('.reloadFolders-switch input[type="checkbox"]');
+
+function changeReloadFolders(data) {
+    if(data["reloadFolders"] == "True"){
+        reloadFoldersInterval = setInterval(function() {getFolders()}, 1000)
+        reloadFoldersToggle.checked = true
+    }
+    else if(data["reloadFolders"] == "False") {
+        clearInterval(reloadFoldersInterval)
+        reloadFoldersToggle.checked = false
+    }
+}
+
+function reloadFolders(input) {
+    if (input.target.checked) {
+        reloadFoldersInterval = setInterval(function() {getFolders()}, 1000)
+        putOptions({"reloadFolders": "True"})
+    }
+    else {
+        clearInterval(reloadFoldersInterval)
+        putOptions({"reloadFolders": "False"})
+    }    
+}
+
+reloadFoldersToggle.addEventListener('change', reloadFolders, false);

@@ -1,14 +1,17 @@
 var optionsData = {};
 
+// Get a JSON response of options inside preferences/options.json
 function getOptions() {
   fetch('/options')
     .then((response) => response.json())
     .then((data) => {
       changeTheme(data)
+      changeReloadFolders(data)
       optionsData = data
     }); 
 }
 
+// Change an option
 function putOptions(option) {
   fetch('/options', {
     method: 'PUT',
@@ -26,6 +29,7 @@ function putOptions(option) {
     });
 }
 
+// Function for the Settings "cog" button in the navbar/top bar 
 function settingsButtonFunction() {
   document.querySelector("div#options-window").style.display = ""
   document.querySelector("div#options-window").style.animation = "fadeIn 1s"
@@ -42,5 +46,5 @@ function closeSettingsButtonFunction() {
   enableScroll()
 }
 
-document.querySelector("div#options-window").style.display = "none"
-getOptions()
+document.querySelector("div#options-window").style.display = "none" // Hide the options tab
+getOptions() // Autorun options so it automatically sets everything

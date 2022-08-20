@@ -34,18 +34,25 @@
 	
 	<div id="options-window">
 		<div id="options-tab">
-			<div id="darkmodeOptionContainer">
-				<h3 id="darkmodeText">Darkmode: </h3>
+			<div id="darkmodeOptionContainer" class="options container">
+				<h3 id="darkmodeText" class="options text">Darkmode: </h3>
 				<label class="theme-switch" for="timeThemeCheckbox">
 					<input type="checkbox" id="timeThemeCheckbox"/>
 					<div class="slider round"></div>
 				</label>
 			</div>
-			<div id="backupAllFoldersContainer">
-				<h3 id="darkmodeText">Backup all folders: </h3>
+			<div id="backupAllFoldersContainer" class="options container">
+				<h3 id="backupText" class="options text">Backup all folders: </h3>
 				<button id="backup-all-button" onmousedown="backupAllFolders()"> 
 					<img id="backup-button-icon" src="assets/material-icons/backup.svg" alt="backup button" width="20px" height="20px" />
 				</button>
+			</div>
+			<div id="reloadFoldersContainer" class="options container">
+				<h3 id="reloadText" class="options text">Autoreload Folders: </h3>
+				<label class="reloadFolders-switch" for="reloadFoldersCheckbox">
+					<input type="checkbox" id="reloadFoldersCheckbox"/>
+					<div class="reloadFolders slider round"></div>
+				</label>
 			</div>
 			<button id="close-button" onmousedown="closeSettingsButtonFunction()"></button> 
 		</div>
