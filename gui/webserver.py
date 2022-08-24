@@ -120,8 +120,7 @@ class WebServer(BaseHTTPRequestHandler):
 						f.close()
 
 					message = {"response": value}
-					test = dumps(message)
-					self.wfile.write(bytes(test, "utf-8"))
+					self.wfile.write(bytes(dumps(message), "utf-8"))
 				else:
 					self.send_response(400)
 					self.end_headers()
@@ -148,6 +147,37 @@ class WebServer(BaseHTTPRequestHandler):
 				else:
 					self.send_response(400)
 					self.end_headers()
+
+			if(self.path.endswith("/deletefolder")):
+				requestContentType = self.headers.get("content-type")
+				requestContentLength = self.headers.get("Content-Length")
+				if(requestContentType == "application/json"):
+					self.send_response(200)
+					self.send_header('Content-type', 'application/json')
+					self.end_headers()
+
+					requestContentBody = loads(self.rfile.read(int(requestContentLength)).decode("utf-8"))
+					
+					foldersList = ""
+					with open("preferences/folders.json", "r") as f:
+						foldersList = loads(f.read())
+						f.close()
+
+					for i in range(len(foldersList)):
+						if(foldersList[i]["hash"] == requestContentBody["deleteHash"]):
+							foldersList.pop(i)
+							break;
+
+					with open("preferences/folders.json", "w") as f:
+						f.write(dumps(foldersList, indent=4, separators=(", ", ": ")))
+						f.close()
+
+					message = {"response": "folder deleted"}
+					self.wfile.write(bytes(dumps(message), "utf-8"))
+				else:
+					self.send_response(400)
+					self.end_headers()
+
 		else:
 			self.send_response_only(403)
 

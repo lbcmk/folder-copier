@@ -10,7 +10,7 @@
 /* Root and Variables */
 
 :root {
-    --primary-color: #fff;
+    --primary-color: #afafaf;
     --secondary-color: #355363;
     --background-color: #ffffff;
     --background-secondary-color: #f0f0f3;
@@ -194,21 +194,16 @@ h3, p {
 button.folder.buttons.deleteButton {
     background-color: rgb(255, 98, 98);
 }
-button.folder.buttons.backupButton {
-    background-color: rgb(104, 204, 104);
-}
-button#backup-all-button {
-    background-color: rgb(104, 204, 104);
-}
 
 button.folder.buttons.deleteButton:hover {
     background-color: rgb(196, 56, 56);
 }
-button.folder.buttons.backupButton:hover {
-    background-color: rgb(71, 151, 71);
+
+button.folder.buttons.backupButton, button#backup-all-button {
+    background-color: rgb(104, 204, 104);
 }
 
-button#backup-all-button:hover {
+button.folder.buttons.backupButton:hover, button#backup-all-button:hover {
     background-color: rgb(71, 151, 71);
 }
 
@@ -294,10 +289,6 @@ button#backup-all-button {
     transform: translateX(30%) translateY(10%);
 }
 
-input#reloadFoldersCheckbox {
-
-}
-
 .reloadFolders-switch {
     display: inline-block;
     height: 34px;
@@ -365,4 +356,105 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Delete Tab */
+
+div#delete-window {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #00000079;
+    z-index: 15;
+}
+
+div#delete-tab {
+    background-color: var(--background-secondary-color);
+    z-index: 15;
+    padding: 10px;
+}
+
+button.delete-yes-button, button.delete-no-button {
+    color: var(--text-color);
+    font-size: 25px;
+    border: 0px;
+    border-radius: 3px;
+    position: absolute;
+    bottom: 40px;
+    width: 75px;
+    height: 50px;
+}
+
+button.delete-yes-button {
+    background-color: rgb(255, 98, 98);
+}
+
+button.delete-yes-button:hover {
+    background-color: rgb(196, 56, 56);
+}
+
+button.delete-no-button {
+    background-color: var(--background-color);
+}
+
+button.delete-no-button:hover {
+    background-color: var(--primary-color);
+}
+
+@media only screen and (min-width: 600px) {
+    div#delete-tab {
+        position: static;
+        width: 50%;
+        min-width: 600px;
+        height: 50%;
+        min-height: 400px;
+        margin: auto;
+        transform: translateY(50%);
+        border-radius: 10px;
+    }
+
+    h3#delete-tab-text {
+        margin-top: 10px;
+        margin-left: 25px;
+        width: 400px;
+        min-width: auto;
+    }
+
+    button.delete-yes-button {
+        left: 25%;
+    }
+    
+    button.delete-no-button {
+        left: 60%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    div#delete-tab {
+        position: static;
+        width: 100% - 20px;
+        height: 50%;
+        transform: translateY(95%);
+    }
+
+    h3#delete-tab-text {
+        margin-top: 10px;
+        margin-left: 25px;
+        width: 75%;
+    }
+
+    button.delete-yes-button {
+        left: 35px;
+    }
+    
+    button.delete-no-button {
+        left: 150px;
+    }
+}
+
+@keyframes dropDown3 { 
+    0% { transform: translateY(200%); } 
+    100% {transform: translateY(95%)}
 }

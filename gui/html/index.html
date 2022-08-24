@@ -8,6 +8,7 @@
 	<script src="options.js" async></script>
 	<script src="folderCard.js" defer></script>
 	<script src="backup.js" defer></script>
+	<script src="delete.js" defer></script>
 </head>
 <body>
 	<div id="header">
@@ -55,6 +56,15 @@
 				</label>
 			</div>
 			<button id="close-button" onmousedown="closeSettingsButtonFunction()"></button> 
+		</div>
+	</div>
+
+	<div id="delete-window">
+		<div id="delete-tab">
+			<h3 id="delete-tab-text">Do you want to remove these folders from being backed-up?</h3>
+			<button class="delete-yes-button" onmousedown="yesDeleteButtonFunction(this.id)">Yes</button> 
+			<button class="delete-no-button" onmousedown="closeDeleteButtonFunction()">No</button> 
+			<button id="close-button" onmousedown="closeDeleteButtonFunction()"></button> 
 		</div>
 	</div>
 

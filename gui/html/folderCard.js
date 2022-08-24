@@ -25,6 +25,7 @@ async function getFolders(writeCard = false) {
     });
 
     directoriesData = await response.json()
+
     if(writeCard == true) {
         for(i=0; i<directoriesData.length; i++) {
             createFolderCard(directoriesData[i])
@@ -38,15 +39,20 @@ async function getFolders(writeCard = false) {
         for(i=0; i<folderCards.length; i++) {
             folderCardIds.push(folderCards[i].id)
         }
-        j = 0
+        console.log(directoriesData, folderCardIds)
+        j = []
         for(i=0; i<directoriesData.length; i++) {
             if(document.getElementById(directoriesData[i]["hash"]) != null) {
-                k = i - j
-                folderCardIds.splice(folderCardIds.indexOf(directoriesData[k]["hash"]), 1);
-                directoriesData.splice(k, 1)
-                j++
+                j.push(i - j.length)
             }
         }
+        for(i=0; i<j.length; i++) {
+            folderCardIds.splice(folderCardIds.indexOf(directoriesData[j[i]]["hash"]), 1);
+            directoriesData.splice(j[i], 1)
+        }
+
+        console.log(directoriesData, folderCardIds)
+
         for(i=0; i<directoriesData.length; i++) {
             createFolderCard(directoriesData[i])
         }
@@ -69,6 +75,7 @@ function createFolderCard(data) {
 
     deleteButton = document.createElement("button")
     deleteButton.setAttribute("class", "folder buttons deleteButton")
+    deleteButton.setAttribute("onmousedown", "deleteButtonFunction(this.parentNode.id)")
 
     deleteButtonImg = document.createElement("img")
     deleteButtonImg.setAttribute("id", "delete-button-icon")
@@ -129,6 +136,7 @@ getFolders(true)
 
 var reloadFoldersInterval = setInterval(function() {getFolders()}, 1000)
 const reloadFoldersToggle = document.querySelector('.reloadFolders-switch input[type="checkbox"]');
+reloadFoldersToggle.checked = true;
 
 function changeReloadFolders(data) {
     if(data["reloadFolders"] == "True"){
@@ -149,7 +157,7 @@ function reloadFolders(input) {
     else {
         clearInterval(reloadFoldersInterval)
         putOptions({"reloadFolders": "False"})
-    }    
+    }
 }
 
 reloadFoldersToggle.addEventListener('change', reloadFolders, false);
