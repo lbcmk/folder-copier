@@ -39,7 +39,6 @@ async function getFolders(writeCard = false) {
         for(i=0; i<folderCards.length; i++) {
             folderCardIds.push(folderCards[i].id)
         }
-        console.log(directoriesData, folderCardIds)
         j = []
         for(i=0; i<directoriesData.length; i++) {
             if(document.getElementById(directoriesData[i]["hash"]) != null) {
@@ -50,9 +49,6 @@ async function getFolders(writeCard = false) {
             folderCardIds.splice(folderCardIds.indexOf(directoriesData[j[i]]["hash"]), 1);
             directoriesData.splice(j[i], 1)
         }
-
-        console.log(directoriesData, folderCardIds)
-
         for(i=0; i<directoriesData.length; i++) {
             createFolderCard(directoriesData[i])
         }
