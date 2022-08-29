@@ -88,6 +88,7 @@ function createFolderCard(data) {
 
     backupButton = document.createElement("button")
     backupButton.setAttribute("class", "folder buttons backupButton")
+    backupButton.setAttribute("onmousedown", "backupButtonFunction(this.parentNode.id)")
 
     backupButtonImg = document.createElement("img")
     backupButtonImg.setAttribute("id", "backup-button-icon")
