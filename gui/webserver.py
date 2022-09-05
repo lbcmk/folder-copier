@@ -3,6 +3,7 @@ from gui.addFolderGUI import FolderChooseGUI
 from webbrowser import open as webBrowserOpen
 from multiprocessing import Process
 from functions.check import CheckDir
+from functions.fileCopy import CopyFiles
 from json import dumps, loads
 
 hostName = "localhost"
@@ -196,11 +197,13 @@ class WebServer(BaseHTTPRequestHandler):
 								backupFolder = i
 						f.close()
 
+					checkf = CheckDir().checkFiles(backupFolder["sourceDir"], backupFolder["destinationDir"])
+
 					if(requestContentBody["format"] == "folders"):
-						checkf = CheckDir().checkFiles(backupFolder["sourceDir"], backupFolder["destinationDir"])
 						self.wfile.write(bytes(dumps(checkf), "utf-8"))
 					elif(requestContentBody["format"] == "backup"):
-						message = {"response": "to be made"}
+						CopyFiles(checkf)
+						message = {"response": "backed up"}
 						self.wfile.write(bytes(dumps(message), "utf-8"))
 					else:
 						message = {"response": "incorrect arguments"}
@@ -215,7 +218,7 @@ class WebServer(BaseHTTPRequestHandler):
 def runWebServer():        
 	webServer = HTTPServer((hostName, serverPort), WebServer)
 	print(f"Server started http://{hostName}:{serverPort}")
-	# webBrowserOpen(f"http://{hostName}:{serverPort}", new=0, autoraise=True)
+	webBrowserOpen(f"http://{hostName}:{serverPort}", new=0, autoraise=True)
 
 	try:
 		webServer.serve_forever()

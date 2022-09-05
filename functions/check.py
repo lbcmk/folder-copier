@@ -1,5 +1,5 @@
 import os
-import hashlib
+from hashlib import md5
 from json import dumps, loads
 
 class CheckDir:
@@ -26,10 +26,10 @@ class CheckDir:
                 if(os.path.exists(dir2)):
                     h1, h2 = 0, 0
                     with open(dir1, 'rb') as f:
-                        h1 = hashlib.md5(f.read()).hexdigest()
+                        h1 = md5(f.read()).hexdigest()
                         f.close()
                     with open(dir2, 'rb') as f:
-                        h2 = hashlib.md5(f.read()).hexdigest()
+                        h2 = md5(f.read()).hexdigest()
                         f.close()
                     
                     if(h1 != h2):
@@ -53,10 +53,12 @@ class CheckDir:
 
         x = {
             "dir1": {
+                "path": p1,
                 "new_files": d1_files,
                 "new_folders": d1_folders
             },
             "dir2": {
+                "path": p2,
                 "new_files": d2_files,
                 "new_folders": d2_folders
             },
@@ -64,5 +66,5 @@ class CheckDir:
         }
 
         jsonChanged = loads(dumps(x, indent=4, separators=(", ", ": ")))
-    
+
         return jsonChanged

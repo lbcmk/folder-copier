@@ -33,10 +33,18 @@ class GetDirectories:
         if(len(dir1)==0 or len(dir2)==0 or dir1==dir2):
             return "Error: Empty or Same Directory"
         if(dir1 in dir2 or dir2 in dir1):
-            if(dir1 in dir2):
-                return "Error: Recursion Error (The second folder is inside the first folder)"
-            else:
-                return "Error: Recursion Error (The first folder is inside the second folder)"
+            tempDir1 = list(reversed(dir1.split("\\")))
+            tempDir2 = list(reversed(dir2.split("\\")))
+            skip = True
+            for i in range(len(tempDir1)):
+                if(tempDir1[i] != tempDir2[i]):
+                    skip = False
+            
+            if(skip == True):
+                if(dir1 in dir2):
+                    return "Error: Recursion Error (The second folder is inside the first folder)"
+                else:
+                    return "Error: Recursion Error (The first folder is inside the second folder)"
 
         folderInfo = {
             "sourceDir": str(dir1),
