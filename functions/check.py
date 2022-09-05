@@ -51,13 +51,6 @@ class CheckDir:
                 if(not os.path.exists(dir2)):
                     d2_files.append(dir1)
 
-        # print(d1_files)
-        # print(d1_folders)
-        # print(d1_edited_files)
-        # print(d2_files)
-        # print(d2_folders)
-        # print(d2_edited_files)
-
         x = {
             "dir1": {
                 "new_files": d1_files,

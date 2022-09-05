@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from gui.addFolderGUI import FolderChooseGUI
 from webbrowser import open as webBrowserOpen
 from multiprocessing import Process
+from functions.check import CheckDir
 from json import dumps, loads
 
 hostName = "localhost"
@@ -174,6 +175,36 @@ class WebServer(BaseHTTPRequestHandler):
 
 					message = {"response": "folder deleted"}
 					self.wfile.write(bytes(dumps(message), "utf-8"))
+				else:
+					self.send_response(400)
+					self.end_headers()
+
+			if(self.path.endswith("/backupfolder")):
+				requestContentType = self.headers.get("content-type")
+				requestContentLength = self.headers.get("Content-Length")
+				if(requestContentType == "application/json"):
+					self.send_response(200)
+					self.send_header('Content-type', 'application/json')
+					self.end_headers()
+					requestContentBody = loads(self.rfile.read(int(requestContentLength)).decode("utf-8"))
+
+					backupFolder = ""
+					with open("preferences/folders.json", "r") as f:
+						temp = loads(f.read())
+						for i in temp:
+							if(i["hash"] == requestContentBody["folder"]):
+								backupFolder = i
+						f.close()
+
+					if(requestContentBody["format"] == "folders"):
+						checkf = CheckDir().checkFiles(backupFolder["sourceDir"], backupFolder["destinationDir"])
+						self.wfile.write(bytes(dumps(checkf), "utf-8"))
+					elif(requestContentBody["format"] == "backup"):
+						message = {"response": "to be made"}
+						self.wfile.write(bytes(dumps(message), "utf-8"))
+					else:
+						message = {"response": "incorrect arguments"}
+						self.wfile.write(bytes(dumps(message), "utf-8"))
 				else:
 					self.send_response(400)
 					self.end_headers()

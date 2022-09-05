@@ -358,9 +358,9 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* Delete Tab */
+/* Delete and Backup Tab */
 
-div#delete-window {
+div#delete-window, div#backup-window {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -370,13 +370,13 @@ div#delete-window {
     z-index: 15;
 }
 
-div#delete-tab {
+div#delete-tab, div#backup-tab {
     background-color: var(--background-secondary-color);
     z-index: 15;
     padding: 10px;
 }
 
-button.delete-yes-button, button.delete-no-button {
+button.delete-yes-button, button.delete-no-button, button.backup-yes-button, button.backup-no-button {
     color: var(--text-color);
     font-size: 25px;
     border: 0px;
@@ -387,24 +387,24 @@ button.delete-yes-button, button.delete-no-button {
     height: 50px;
 }
 
-button.delete-yes-button {
+button.delete-yes-button, button.backup-yes-button {
     background-color: rgb(255, 98, 98);
 }
 
-button.delete-yes-button:hover {
+button.delete-yes-button:hover, button.backup-yes-button:hover {
     background-color: rgb(196, 56, 56);
 }
 
-button.delete-no-button {
+button.delete-no-button, button.backup-no-button {
     background-color: var(--background-color);
 }
 
-button.delete-no-button:hover {
+button.delete-no-button:hover, button.backup-no-button:hover {
     background-color: var(--primary-color);
 }
 
 @media only screen and (min-width: 600px) {
-    div#delete-tab {
+    div#delete-tab, div#backup-tab {
         position: static;
         width: 50%;
         min-width: 600px;
@@ -415,41 +415,41 @@ button.delete-no-button:hover {
         border-radius: 10px;
     }
 
-    h3#delete-tab-text {
+    h3#delete-tab-text, h3#backup-tab-text {
         margin-top: 10px;
         margin-left: 25px;
         width: 400px;
         min-width: auto;
     }
 
-    button.delete-yes-button {
+    button.delete-yes-button, button.backup-yes-button {
         left: 25%;
     }
     
-    button.delete-no-button {
+    button.delete-no-button, button.backup-no-button {
         left: 60%;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    div#delete-tab {
+    div#delete-tab, div#backup-tab {
         position: static;
         width: 100% - 20px;
         height: 50%;
         transform: translateY(95%);
     }
 
-    h3#delete-tab-text {
+    h3#delete-tab-text, h3#backup-tab-text {
         margin-top: 10px;
         margin-left: 25px;
         width: 75%;
     }
 
-    button.delete-yes-button {
+    button.delete-yes-button, button.backup-yes-button {
         left: 35px;
     }
     
-    button.delete-no-button {
+    button.delete-no-button, button.backup-no-button {
         left: 150px;
     }
 }
@@ -459,98 +459,26 @@ button.delete-no-button:hover {
     100% {transform: translateY(95%)}
 }
 
-/* Backup Tab */
-
-div#backup-window {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background-color: #00000079;
-    z-index: 15;
-}
-
-div#backup-tab {
-    background-color: var(--background-secondary-color);
-    z-index: 15;
-    padding: 10px;
-}
-
-button.backup-yes-button, button.backup-no-button {
-    color: var(--text-color);
-    font-size: 25px;
-    border: 0px;
-    border-radius: 3px;
-    position: absolute;
-    bottom: 40px;
-    width: 75px;
-    height: 50px;
-}
-
-button.backup-yes-button {
-    background-color: rgb(255, 98, 98);
-}
-
-button.backup-yes-button:hover {
-    background-color: rgb(196, 56, 56);
-}
-
-button.backup-no-button {
+div#folders {
+    display: inline-block;
+    overflow: auto;
     background-color: var(--background-color);
+    border: none;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 25px;
+    width: 90%;
+    height: calc(100% - 200px);
 }
 
-button.backup-no-button:hover {
-    background-color: var(--primary-color);
+h3#greenText {
+    color: rgb(104, 204, 104);
 }
 
-@media only screen and (min-width: 600px) {
-    div#backup-tab {
-        position: static;
-        width: 50%;
-        min-width: 600px;
-        height: 50%;
-        min-height: 400px;
-        margin: auto;
-        transform: translateY(50%);
-        border-radius: 10px;
-    }
-
-    h3#backup-tab-text {
-        margin-top: 10px;
-        margin-left: 25px;
-        width: 400px;
-        min-width: auto;
-    }
-
-    button.backup-yes-button {
-        left: 25%;
-    }
-    
-    button.backup-no-button {
-        left: 60%;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    div#backup-tab {
-        position: static;
-        width: 100% - 20px;
-        height: 50%;
-        transform: translateY(95%);
-    }
-
-    h3#backup-tab-text {
-        margin-top: 10px;
-        margin-left: 25px;
-        width: 75%;
-    }
-
-    button.backup-yes-button {
-        left: 35px;
-    }
-    
-    button.backup-no-button {
-        left: 150px;
-    }
+h3#redText {
+    color: rgb(255, 98, 98);
 }
