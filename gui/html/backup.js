@@ -1,5 +1,9 @@
 function backupAllFolders() {
-    console.log("backup")
+    folders = document.querySelectorAll("div.folder.list")
+    for(i=0; i<folders.length; i++) {
+        runBackupFolders(folders[i].id, "backup")
+    }
+
 }
 
 // Function for the backup button
@@ -61,8 +65,8 @@ function runBackupFolders(selfID, format = "folders") {
             addTextToFoldersTextBox(data["dir1"]["new_folders"], "greenText", "New Folders:", "+") // New Folders
             addTextToFoldersTextBox(data["dir1"]["new_files"], "greenText", "New Files:", "+") // New Files
             addTextToFoldersTextBox(data["edited_files"], "redText", "Changed Files:", "\u2022") // Changed Files
-            // addTextToFoldersTextBox(data["dir2"]["new_folders"], "redText", "Removed Folders:", "-") // Removed Folders
-            // addTextToFoldersTextBox(data["dir2"]["new_files"], "redText", "Removed Files:", "-") // Removed Files
+            addTextToFoldersTextBox(data["dir2"]["new_folders"], "redText", "Removed Folders:", "-") // Removed Folders
+            addTextToFoldersTextBox(data["dir2"]["new_files"], "redText", "Removed Files:", "-") // Removed Files
         }
     })
       .catch((error) => {
