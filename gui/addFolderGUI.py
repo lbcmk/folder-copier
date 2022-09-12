@@ -11,7 +11,7 @@ class FolderChooseGUI:
         self.app = customtkinter.CTk()
         self.app.geometry("800x400")
         self.app.title("Folder Copier")
-        self.app.iconbitmap("assets/icon.ico")
+        self.app.iconbitmap("gui/html/assets/icon.ico")
         self.app.minsize(300, 200)
         
         self.filename1 = ""
